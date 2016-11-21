@@ -1,6 +1,6 @@
-;(function(window,Polyer){
-	Polyer.data.regExps = {
+;(function(window,Ployer){
+	Ployer.data.regExps = {
 		doublePara:/{{.+}}/,
 		htmlComments:/<!--[\s\S]*?-->/g
 	}
-})(window,Polyer)
+})(window,Ployer)

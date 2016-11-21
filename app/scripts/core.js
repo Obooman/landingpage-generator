@@ -1,0 +1,3 @@
+var Ployer = {};
+
+Ployer.data = {};

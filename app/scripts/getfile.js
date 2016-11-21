@@ -1,5 +1,5 @@
 ;(function(){
-	Polyer.getFile = function(url, func) {
+	Ployer.getFile = function(url, func) {
 		var xmlhttp = new XMLHttpRequest()
 
 		xmlhttp.onreadystatechange = function() {
@@ -13,4 +13,4 @@
 
 		xmlhttp.send({});
 	}
-})(window,Polyer)
+})(window,Ployer)

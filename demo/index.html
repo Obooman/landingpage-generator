@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		iframe{
+			display: none;
+		}
+
+		#box{
+			width: 300px;
+			height: 200px;
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="box" dropable="true" ondragover="dr(event)" ondrop="dos(event)"></div>
+	<script src="../app/scripts/core.js"></script>
+	<script src="../app/scripts/regExp.js"></script>
+	<script src="../app/scripts/download.js"></script>
+	<script src="../app/scripts/transformStyle.js"></script>
+	<script src="../app/scripts/getFile.js"></script>
+	<script src="../app/scripts/FrameComponent.js"></script>
+	<script>
+		var {
+			getFile,
+			setStyles
+		} = Ployer;
+
+		var oBox = document.querySelector('#box');
+
+		function dr(ev){
+			ev.preventDefault();
+		}
+
+		function dos(ev){
+			console.log(ev.dataTransfer);
+		}
+
+		getFile("./tmps/some.tpl",function(data){
+			document.body.appendChild(
+				setStyles(new FrameComponent(data))
+			);
+		})
+
+		window.onmessage = function({data}){
+			var oDiv = document.createElement('div');
+			oDiv.innerHTML = data;
+			oDiv.draggable = true;
+			oDiv.id = `q${parseInt(Math.random()*10e12)}`
+			oDiv.ondragstart = function(ev){
+				ev.dataTransfer.setData("text/plain",this.id)
+			}
+
+			document.body.appendChild(oDiv);
+		}
+
+	</script>
+</body>
+</html>
