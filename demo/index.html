@@ -16,7 +16,7 @@
 	</style>
 </head>
 <body>
-	<div id="box" dropable="true" ondragover="dr(event)" ondrop="dos(event)"></div>
+	<div id="box" draggable="false" dropable="true" ondragover="dr(event)" ondrop="dos(event)"></div>
 	<script src="../app/scripts/core.js"></script>
 	<script src="../app/scripts/regExp.js"></script>
 	<script src="../app/scripts/download.js"></script>
@@ -36,7 +36,9 @@
 		}
 
 		function dos(ev){
-			console.log(ev.dataTransfer);
+			var data = ev.dataTransfer.getData("text");
+
+			oBox.appendChild(document.querySelector(`#${data}`));
 		}
 
 		getFile("./tmps/some.tpl",function(data){
@@ -51,7 +53,9 @@
 			oDiv.draggable = true;
 			oDiv.id = `q${parseInt(Math.random()*10e12)}`
 			oDiv.ondragstart = function(ev){
-				ev.dataTransfer.setData("text/plain",this.id)
+				ev.dataTransfer.effectAllowed = "copy";
+				ev.dataTransfer.setData("text/plain", this.id);
+
 			}
 
 			document.body.appendChild(oDiv);
